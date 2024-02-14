@@ -6,10 +6,17 @@ Cabe resaltar que también utiliza PostgreSql como motor de base de datos para p
 
 ## Ejecutar la aplicación en desarrollo
 
-La aplicación se puede ejecutar en modo desarrollo y habilitar la opción de live coding con el siguiente comando:
+Lo primero que se debe hacer antes de ejecutar el proyecto es cambiar las credenciales de nuestra base de datos postgres, esto se realiza en: **src\main\resources\application.properties**
+```
+quarkus.datasource.username=usuario
+quarkus.datasource.password=contrasena
+```
+
+Luego ya podemos ejecutar la aplicación en modo desarrollo con el siguiente comando:
 ```shell script
 ./mvnw compile quarkus:dev
 ```
+Este comando lo que hará es levantar un servidor en el ambiente de desarrollo y activar el live coding.
 
 Si se quiere acceder a la ui de swagger directamente se puede ir a esta ruta
 ```
@@ -18,14 +25,14 @@ http://localhost:8080/q/swagger-ui/
 
 > **_NOTA:_**  Se puede acceder a la ui de Quarkus en dev con la siguiente ruta: http://localhost:8080/q/dev/.
 
-## Diagrama de clase
-![Diagrama clase](src\assets\img\diagrama-clase.png)
+## Diagramas
 
+Estos se encuentran dentro de la ruta **src\assets\img** en ella se puede encontrar diagramas como:
+
+### 1. Diagrama de clase
 En este diagrama se define cómo está compuesta la clase principal la cual es Client, que maneja los datos de los diferentes clientes para los cuales queremos hacer las diferentes operaciones.
 
-## Diagrama de arquitectura
-![Diagrama arquitectura](src\assets\img\diagrama-arquitectura.png)
-
+### 2. Diagrama de arquitectura
 En este diagrama se define el flujo básico de la aplicación, la cual es que el actor(la persona) por medio de un cliente como puede ser la ui de swagger o el propio postman, realiza una petición a un endpoint específico y este tiene la tarea de conectarse a la base de datos y realizar la operación que solicita el usuario.
 
 ## Estructura del proyecto
@@ -52,6 +59,26 @@ En esta parte definimos las rutas de los diferentes endpoints y es donde radican
 
 ### Test
 El proyecto de test nos permite probar cierta funcionalidad (endpoint o repositorio) con el fin de validar si ejecuta la función de la forma correcta, cabe resaltar que los test se realizaron utilizando la extension de **quarkus-junit5**
+
+## Endpoints
+
+### 1. get("api/clients")
+Este endpoint nos retorna un arreglo con todos los clientes activos hasta el momento
+
+### 2. post("api/clients")
+Este endpoint recibe un objeto de tipo **CreateClientDto**, mediante la propiedad countryCode consigue el gentilicio, realiza el mapeo e inserta el registro en la base de datos y al final retorna el registro agregado.
+
+### 3. get("api/clients/{id}")
+Este endpoint recibe por ruta el id de un cliente en específico, y si existe lo retorna, si no existe dispara una excepción indicando que no existe ningún cliente registrado con ese id provisto.
+
+### 4. delete("api/clients/{id}")
+Este endpoint recibe por ruta el id de un cliente en específico, y si existe lo elimina de la base de datos, si no existe dispara una excepción indicando que no existe ningún cliente registrado con ese id provisto.
+
+### 5. put("api/clients/{id}")
+Este endpoint recibe por ruta el id de un cliente en específico, y si existe lo actualiza en la base de datos, si no existe dispara una excepción indicando que no existe ningún cliente registrado con ese id provisto. También recibe un objeto de tipo **UpdateClientDto** con las propiedades: correo, dirección, teléfono y el código del país. Igualmente que el endpoint de crear este actualiza el gentilicio mediante el código del país enviado.
+
+### 6. get("api/clients/getClientsByDemonyms")
+Este endpoint recibe por query param el gentilicio y retorna una lista de todos los clientes que pertenecen a un país.
 
 ## Extensiones utilizadas
 
