@@ -50,9 +50,11 @@ En este caso el mapper se utiliza para transformar un objeto de dto en su entida
 Se utilizan los exceptions para controlar y manejar los errores a lo largo de los endpoints para que estos retornen una respuesta clara al usuario sobre qué está pasando. Estos errores pueden ser desde fallos con el servidor hasta la no existencia de un registro en específico.
 
 ### Service
-Primero está el **IClientService**, es una interfaz que se encarga de realizar la petición http al servicio que retorna los datos de un país por medio del código, para que podamos sacar de allí el gentilicio específico.
+Primero está el **IClientService**, es una interfaz que se encarga de realizar la petición http al servicio **(https://restcountries.com/v3.1/alpha/{countryCode})**  que retorna los datos de un país por medio del código, para que podamos sacar de allí el gentilicio específico.
 
 Luego está el servicio de **CountryService**, su función es tomar esa respuesta json generada por la petición anterior y retornar únicamente el gentilicio que es lo que nos interesa para ser guardado en la base de datos.
+
+> **_NOTA:_**  El listado de códigos por países según la norma ISO-3166 se puede consultar en esta página: **https://laendercode.net/es/**.
 
 ### Resource
 En esta parte definimos las rutas de los diferentes endpoints y es donde radican todas las peticiones.
