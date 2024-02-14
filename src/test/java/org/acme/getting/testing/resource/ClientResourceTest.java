@@ -1,4 +1,4 @@
-package org.acme.getting.testing;
+package org.acme.getting.testing.resource;
 
 import org.junit.jupiter.api.Test;
 

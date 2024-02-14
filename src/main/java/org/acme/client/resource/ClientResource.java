@@ -118,21 +118,4 @@ public class ClientResource {
                     "Error del servidor al obtener los clientes pertenecientes a un país");
         }
     }
-
-    // private String getDemonymByCountry(String countryCode) {
-    //     try {
-    //         String country = clientService.getCountryByCode(countryCode);
-    //         if(country == null){
-    //             throw new NoSuchElementException("No fue encontrado el pais con el siguiente codigo: " + countryCode);
-    //         }
-    //         ObjectMapper mapper = new ObjectMapper();
-    //         JsonNode rootNode = mapper.readTree(country);
-    //         JsonNode demonymsNode = rootNode.get(0).get("demonyms");
-    //         String englishDemomyn = demonymsNode.get("eng").get("f").asText();
-
-    //         return englishDemomyn;
-    //     } catch (JsonProcessingException e) {
-    //         return null;
-    //     }
-    // }
 }

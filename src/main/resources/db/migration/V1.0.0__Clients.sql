@@ -1,3 +1,6 @@
+drop table if exists clients;
+drop sequence if exists clients_SEQ;
+
 create table clients (
         id bigint not null,
         address varchar(255) not null,
